@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Home from './pages/home.js';
+import Login from './pages/login.js';
+import PageRender from './pagerender.js';
+
+import { useSelector, useDispatch } from 'react-redux';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <input type="checkbox" id="theme" />
+      <div className="App">
+        <div className="main">
+      <Routes>
+      <Route path="/" Component={Login }/>
+      <Route path="/:page" Component={PageRender} />
+      <Route path="/:page/:id" Component={PageRender} />
+      </Routes>
+      </div>
+      </div>
+  </BrowserRouter>
+
   );
 }
 
