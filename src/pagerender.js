@@ -24,9 +24,7 @@ const PageRender = () => {
     } else {
         pageName = `${page}`;
     }
-    console.log(pageName);
     return generatePage(pageName);
-
 }
 
 

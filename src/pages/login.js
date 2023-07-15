@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { login } from '../redux/actions/authAction.js';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const Login = () => {
@@ -10,8 +10,13 @@ const Login = () => {
     const initialState = {email: '', password: ''};
     const [userData, setUserData] = useState(initialState);
     const { email, password } = userData;
-   
     const dispatch = useDispatch();
+
+    const history = useNavigate();
+    const { auth } = useSelector(state => state);
+    useEffect(() => {
+        if(auth.token) history("/")
+    }, [auth.token, history])
 
     const handleChangeInput = e => {
         const {name, value} = e.target;
@@ -23,6 +28,9 @@ const Login = () => {
         console.log(userData);
         dispatch(login(userData));
     }
+
+
+
 
 
     return (
