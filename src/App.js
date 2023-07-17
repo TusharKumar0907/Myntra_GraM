@@ -5,7 +5,7 @@ import Home from './pages/home.js';
 import Login from './pages/login.js';
 import PageRender from './pagerender.js';
 import Register from './pages/register.js';
-import Header from "./components/header/Header.js";
+import Header from './components/header.js'
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -24,10 +24,12 @@ function App() {
   return (
 
     <BrowserRouter>
-      <input type="checkbox" id="theme" />
+      
+      { auth.token && <Header /> }
+
       <div className="App">
         <div className="main">
-      { auth.token && <Header /> }
+    
       <Routes>
       <Route exact path="/" Component={auth.token ? Home : Login}/>
       <Route exact path="/:page" Component={ PageRender } />
@@ -35,6 +37,8 @@ function App() {
       </Routes>
       </div>
       </div>
+
+      
     </BrowserRouter>
 
   );

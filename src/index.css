@@ -29,7 +29,10 @@ code {
   margin: auto; 
 }
 
-
 @import url("./styles/auth.css");
+
+@import url("./styles/header.css");
+
+
 
 
