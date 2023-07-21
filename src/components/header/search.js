@@ -20,7 +20,10 @@ const Search = () => {
         
         if(search && auth.token) {
             getDataAPI(`search?username=${ search }`, auth.token)
-            .then(res => setUsers(res.data.users))
+            .then(res => {
+                console.log(res);
+                setUsers(res.data.users)
+            })
             .catch(err => {
                 dispatch({
                     type: GLOBALTYPES.ALERT , payload: {error: err.response.data.msg}

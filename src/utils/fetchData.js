@@ -2,10 +2,19 @@ import axios from 'axios';
 
 
 export const getDataAPI = async (url, token) => {
+    
+    // console.log(url);
+    // console.log(token);
+
     const res = await axios.get(`/api/${url}`, {
         headers: {Authorization: token}
     })
+
+
+    // console.log(res);
+    
     return res;
+
 }
 
 export const postDataAPI = async (url, post, token) => {
