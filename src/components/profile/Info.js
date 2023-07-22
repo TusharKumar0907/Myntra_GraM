@@ -3,12 +3,12 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProfileUsers } from '../../redux/actions/ProfileAction.js';
 import EditProfile from './EditProfile.js';
+import FollowBtn from '../FollowBtn'
 
 
 
 const Info = () => {
     
-
 
     const { id } = useParams();
     const { auth, profile } = useSelector(state => state);
@@ -46,7 +46,7 @@ const Info = () => {
       
       <div className="info">
       {
-          userData.map((user, index) => (
+          userData.map((user) => (
               
               <div className="info_container" key={user._id}>
 
@@ -55,11 +55,17 @@ const Info = () => {
                       <div className="info_content_title">
                           <h2>{user.username}</h2>
                           {
-                              
-                            <button className="btn btn-outline-info"
-                            onClick={()=>setOnEdit(true) }>
-                                Edit Profile
-                            </button>
+
+
+                            user._id === auth.user._id
+                            ?  <button className="btn btn-outline-info"
+                                onClick={() => setOnEdit(true)}>
+                                    Edit Profile
+                                </button>    
+                                : <FollowBtn
+                                user = {user}
+                                />
+
               
                           }
                                      
@@ -85,8 +91,12 @@ const Info = () => {
 
                   {
                     onEdit && 
+                    
                     <EditProfile 
-                    user = {user} setOnEdit = { setOnEdit }/>
+                    user = {user} 
+                    setOnEdit = { setOnEdit }
+                    />
+
                   }
 
               </div>
