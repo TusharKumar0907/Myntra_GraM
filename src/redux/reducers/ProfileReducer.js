@@ -1,5 +1,5 @@
 import { PROFILE_TYPES } from '../actions/ProfileAction.js'
-// import { EditData } from '../actions/globalTypes.js'
+import { EditData } from '../actions/globalTypes.js'
 
 const initialState = {
     loading: false,
@@ -22,17 +22,19 @@ const profileReducer = (state = initialState, action) => {
                 users: [...state.users, action.payload.user]
             };
         case PROFILE_TYPES.FOLLOW:
+            // console.log(action.payload);
+            // console.log(state);
             return {
                 ...state,
                 users: state.users.map(user =>
                     (user._id === action.payload._id ? action.payload : user)   
                 )
             };
-        // case PROFILE_TYPES.UNFOLLOW:
-        //     return {
-        //         ...state,
-        //         users: EditData(state.users, action.payload._id, action.payload)
-        //     };
+        case PROFILE_TYPES.UNFOLLOW:
+            return {
+                ...state,
+                users: EditData(state.users, action.payload._id, action.payload)
+            };
         case PROFILE_TYPES.GET_ID:
             return {
                 ...state,

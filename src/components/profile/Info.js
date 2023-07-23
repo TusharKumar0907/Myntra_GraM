@@ -33,15 +33,17 @@ const Info = () => {
 
 
     useEffect(() => {
-      dispatch(getProfileUsers({users: profile.users, id, auth}));
-      const newData = profile.users.filter(user => user._id === id);
-      const uniqueData = Array.from(new Set(newData.map(user => user._id))).map(id =>
-      newData.find(user => user._id === id)
-      );
-      setUserData(uniqueData);
+        if(id === auth.user._id){
+            setUserData([auth.user])
+        }else{
+            dispatch(getProfileUsers({users: profile.users, id, auth}));
+            const newData = profile.users.filter(user => user._id === id);
+            const uniqueData = Array.from(new Set(newData.map(user => user._id))).map(id =>newData.find(user => user._id === id));
+            setUserData(uniqueData);
+        }
     }, [id, auth, dispatch, profile.users]);
 
-    
+
     return ( 
       
       <div className="info">
