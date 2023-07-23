@@ -3,7 +3,9 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProfileUsers } from '../../redux/actions/ProfileAction.js';
 import EditProfile from './EditProfile.js';
-import FollowBtn from '../FollowBtn'
+import FollowBtn from '../FollowBtn';
+import Followers from './Followers.js';
+import Following from './Following.js';
 
 
 
@@ -16,6 +18,11 @@ const Info = () => {
 
     const [userData, setUserData] = useState([]);
     const [onEdit, setOnEdit] = useState(false);
+
+
+    const [showFollowers, setShowFollowers] = useState(false);
+    
+    const [showFollowing, setShowFollowing] = useState(false);
 
 
     //     // Assuming getDataAPI returns a Promise
@@ -74,10 +81,10 @@ const Info = () => {
                       </div>
 
                       <div className="follow_btn">
-                          <span className="mr-4">
+                          <span className="mr-4" onClick={() => setShowFollowers(true)}>
                               {user.followers.length} Followers
                           </span>
-                          <span className="ml-4">
+                          <span className="ml-4" onClick={() => setShowFollowing(true)}>
                               {user.following.length} Following
                           </span>
                       </div>
@@ -100,6 +107,29 @@ const Info = () => {
                     />
 
                   }
+
+
+                  {
+                    
+                    showFollowers &&
+                    <Followers 
+                    users = {user.followers}
+                    setShowFollowers={setShowFollowers}
+                    />
+
+                  }
+
+
+                  {
+                    
+                    showFollowing &&
+                    <Following 
+                    users = {user.following}
+                    setShowFollowing={setShowFollowing}
+                    />
+
+                  }
+
 
               </div>
           ))
