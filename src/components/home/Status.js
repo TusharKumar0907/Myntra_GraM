@@ -10,7 +10,7 @@ const Status = () => {
     return (
         <div className="status my-3 d-flex">
             <button className="statusBtn flex-fill"
-            onClick={() => dispatch({type:GLOB})}>
+            onClick={() => dispatch({type:GLOBALTYPES.STATUS, payload: true})}>
                 { auth.user.fullname }, What are you thinking ?
             </button>
         </div>

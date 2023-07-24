@@ -4,12 +4,14 @@ import alert from './alertReducer.js';
 import theme from './themeReducer.js';
 import profile from './ProfileReducer.js';
 import status from './statusReducer.js';
+import homePost from './postReducer.js';
 
 export default combineReducers({
     auth,
     alert,
     theme,
     profile,
-    status
+    status,
+    homePost
 });
 

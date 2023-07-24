@@ -10,8 +10,6 @@ export const getDataAPI = async (url, token) => {
         headers: {Authorization: token}
     })
 
-
-    // console.log(res);
     
     return res;
 
