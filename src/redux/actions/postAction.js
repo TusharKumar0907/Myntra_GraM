@@ -17,6 +17,8 @@ export const createPost = ({content, images, auth}) => async (dispatch) => {
     let media = []
     try {
         
+        console.log({content, images, auth });
+        
         dispatch({ type: GLOBALTYPES.ALERT, payload: {loading: true} })
         
         if(images.length > 0) media = await imageUpload(images)
@@ -58,7 +60,9 @@ export const getPosts = (token) => async (dispatch) => {
 }
 
 export const updatePost = ({content, images, auth, status}) => async (dispatch) => {
+    
     let media = []
+    
     const imgNewUrl = images.filter(img => !img.url)
     const imgOldUrl = images.filter(img => img.url)
 
@@ -68,16 +72,18 @@ export const updatePost = ({content, images, auth, status}) => async (dispatch) 
     ) return;
 
     try {
-        dispatch({ type: GLOBALTYPES.ALERT, payload: {loading: true} })
+        
         if(imgNewUrl.length > 0) media = await imageUpload(imgNewUrl)
 
         const res = await patchDataAPI(`post/${status._id}`, { 
             content, images: [...imgOldUrl, ...media] 
         }, auth.token)
 
+
+        console.log(res);
+
         dispatch({ type: POST_TYPES.UPDATE_POST, payload: res.data.newPost })
 
-        dispatch({ type: GLOBALTYPES.ALERT, payload: {success: res.data.msg} })
     } catch (err) {
         dispatch({
             type: GLOBALTYPES.ALERT,

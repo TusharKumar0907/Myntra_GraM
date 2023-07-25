@@ -1,10 +1,18 @@
 import React from 'react';
+import Carousel from '../../Carousel.js';
 
 
-const CardBody = () => {
+const CardBody = ({post}) => {
     return (
-        <div>
-            <h2>CardBody</h2>
+        <div className="card_body">
+            <div className="card_body-content">
+                <span>{ post.content }</span>
+            </div>
+
+            {
+                <Carousel images={post.images} id={post._id}/>
+            }
+
         </div>
     )
 }
