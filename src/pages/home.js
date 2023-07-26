@@ -5,8 +5,9 @@ import { useSelector } from 'react-redux';
 
 
 const Home = () => {
+  
     const { homePost } = useSelector(state => state);
-    console.log(homePost);
+  
     return (
         <div>
             <Status />
