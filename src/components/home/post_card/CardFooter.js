@@ -53,7 +53,7 @@ const CardFooter = ({post}) => {
                     />
 
                     <Link to={`/post/${post._id}`} className="text-dark">
-                        <span class="material-icons">comment</span>
+                        <span className="material-icons">comment</span>
                     </Link>
 
                 </div>

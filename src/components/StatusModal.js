@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { GLOBALTYPES } from '../redux/actions/globalTypes.js';
-import { createPost,updatePost } from '../redux/actions/postAction.js';
+import { createPost, updatePost } from '../redux/actions/postAction.js';
 
 
 const StatusModal = () => {
