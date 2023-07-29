@@ -12,7 +12,7 @@ const Posts = () => {
             {
                 homePost.posts.map(post => (
                     <div key={post._id} className="card my-3">
-                        < PostCard post={post} />
+                        < PostCard post = { post } />
                     </div>
                 ))
             }

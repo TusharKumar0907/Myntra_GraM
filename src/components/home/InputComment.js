@@ -33,12 +33,11 @@ const InputComment = ( {post, children} ) => {
         <form className="card-footer comment_input" onSubmit={handlesubmit} >
             
            <input type="text" placeholder="Add your Comments..." 
-            value={content} onChange={e => setContent(e.target.value)} />
+            value={content} onChange={e => setContent(e.target.value)} /> 
 
             <button type="submit" className="postBtn">
                 Post
-            </button>
-
+            </button> 
 
         </form>
     )
@@ -46,3 +45,4 @@ const InputComment = ( {post, children} ) => {
 
 
 export default InputComment;
+

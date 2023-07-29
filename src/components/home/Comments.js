@@ -1,9 +1,17 @@
-import React from 'react'
+import React from 'react';
+import CommentDisplay from './comments/CommentDisplay.js';
 
-const Comments = () => {
+
+const Comments = ({post}) => {
     return (
         <div>
-            <h1>Comments</h1>
+            {   
+                 
+                post.comments.map(comment => (
+                    <CommentDisplay key={comment._id} comment={comment} post={post} />
+                ))
+
+            }
         </div>
     )
 }
