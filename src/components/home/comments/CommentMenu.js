@@ -2,9 +2,8 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 // import { deleteComment } from '../../../redux/actions/commentAction'
 
-const CommentMenu = ({post, comment, setOnEdit}) => {
+const CommentMenu = ({post, comment, setOnEdit, auth}) => {
 
-    const { auth } = useSelector(state => state)
     const dispatch = useDispatch()
 
     // const handleRemove = () => {
@@ -55,4 +54,4 @@ const CommentMenu = ({post, comment, setOnEdit}) => {
     )
 }
 
-export default CommentMenu
+export default CommentMenu;
