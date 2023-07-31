@@ -4,7 +4,7 @@ import LikeButton from '../../LikeButton.js';
 import moment from 'moment';
 import { useSelector, useDispatch } from 'react-redux';
 import CommentMenu from './CommentMenu.js';
-import { updateComment } from '../../../redux/actions/CommentAction.js';
+import { updateComment, likeComment, UnLikeComment } from '../../../redux/actions/CommentAction.js';
 
 
 const CommentCard = ({comment, post}) => {
@@ -17,15 +17,34 @@ const CommentCard = ({comment, post}) => {
     const[isLike, setIsLike] = useState(false);
     const[onEdit, setOnEdit] = useState(false);
 
-    
-    
+    const[loadLike, setLoadLike] = useState();
+
+    useEffect(() => {
+        setContent(comment.content);
+        if(comment.likes.find(like => like._id === auth.user._id)) {
+            setIsLike(true);
+        } else {
+            setIsLike(false);
+        }
+    }, [comment, auth.user._id])
+
 
     const handleLike = () => {
+        if(loadLike) return;
+        setIsLike(true);
 
+        setLoadLike(true);
+        dispatch(likeComment({comment, post, auth}));
+        setLoadLike(false);
     }
 
     const handleUnLike = () => {
-        
+        if(loadLike) return;
+        setIsLike(false);
+
+        setLoadLike(true);
+        dispatch(UnLikeComment({comment, post, auth}));
+        setLoadLike(false);
     }
 
     const handleUpdate = () => {
