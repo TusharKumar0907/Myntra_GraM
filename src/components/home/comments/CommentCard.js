@@ -5,9 +5,12 @@ import moment from 'moment';
 import { useSelector, useDispatch } from 'react-redux';
 import CommentMenu from './CommentMenu.js';
 import { updateComment, likeComment, UnLikeComment } from '../../../redux/actions/CommentAction.js';
+import InputComment from '../InputComment.js';
 
+const CommentCard = ({children, comment, post, commentId}) => {
 
-const CommentCard = ({comment, post}) => {
+    // console.log(comment);
+    // console.log(commentId);
 
     const { auth } = useSelector(state => state);
 
@@ -16,9 +19,8 @@ const CommentCard = ({comment, post}) => {
     const[content, setContent] = useState('');
     const[isLike, setIsLike] = useState(false);
     const[onEdit, setOnEdit] = useState(false);
-
     const[loadLike, setLoadLike] = useState();
-
+    
     useEffect(() => {
         setContent(comment.content);
         if(comment.likes.find(like => like._id === auth.user._id)) {
@@ -96,8 +98,8 @@ const CommentCard = ({comment, post}) => {
                     </small>
                     
                     </>
-                    : <small className="font-weight-bold">
-                        reply
+                    :<small>
+
                     </small>
                 }
 
@@ -116,4 +118,4 @@ const CommentCard = ({comment, post}) => {
 }
 
 
-export default CommentCard;
+export default CommentCard; 

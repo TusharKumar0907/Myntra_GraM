@@ -141,28 +141,18 @@ export const getPost = ({detailPost, id, auth}) => async (dispatch) => {
     }
 }
 
-// export const deletePost = ({post, auth, socket}) => async (dispatch) => {
-//     dispatch({ type: POST_TYPES.DELETE_POST, payload: post })
+export const deletePost = ({post, auth}) => async (dispatch) => {
+    dispatch({ type: POST_TYPES.DELETE_POST, payload: post })
 
-//     try {
-//         const res = await deleteDataAPI(`post/${post._id}`, auth.token)
-
-//         // Notify
-//         const msg = {
-//             id: post._id,
-//             text: 'added a new post.',
-//             recipients: res.data.newPost.user.followers,
-//             url: `/post/${post._id}`,
-//         }
-//         dispatch(removeNotify({msg, auth, socket}))
-        
-//     } catch (err) {
-//         dispatch({
-//             type: GLOBALTYPES.ALERT,
-//             payload: {error: err.response.data.msg}
-//         })
-//     }
-// }
+    try {
+        const res = await deleteDataAPI(`post/${post._id}`, auth.token);        
+    } catch (err) {
+        dispatch({
+            type: GLOBALTYPES.ALERT,
+            payload: {error: err.response.data.msg}
+        })
+    }
+}
 
 export const savePost = ({post, auth}) => async (dispatch) => {
     const newUser = {...auth.user, saved: [...auth.user.saved, post._id]}

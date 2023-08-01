@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { createComment } from '../../redux/actions/CommentAction.js';
 
-const InputComment = ( {post, children} ) => {
+const InputComment = ( {post, children, onReply, setOnReply } ) => {
 
     const [content, setContent] = useState('');
 
