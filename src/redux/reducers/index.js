@@ -5,6 +5,7 @@ import theme from './themeReducer.js';
 import profile from './ProfileReducer.js';
 import status from './statusReducer.js';
 import homePost from './postReducer.js';
+import suggestions from './suggestionReducer.js';
 
 export default combineReducers({
     auth,
@@ -12,6 +13,7 @@ export default combineReducers({
     theme,
     profile,
     status,
-    homePost
+    homePost,
+    suggestions
 });
 

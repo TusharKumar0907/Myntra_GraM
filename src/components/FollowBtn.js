@@ -4,6 +4,9 @@ import { follow, unfollow } from '../redux/actions/ProfileAction.js'
 
 const FollowBtn = ({ user }) => {
 
+
+    console.log(user);
+
     const [followed, setFollowed] = useState(false);
 
     const { auth, profile } = useSelector(state => state);
@@ -26,26 +29,22 @@ const FollowBtn = ({ user }) => {
         dispatch(unfollow({users: profile.users, user, auth}));
     }
 
-    return (
-        <div>
-            
-            {
-            
-            followed
-            
-            ? <button className="btn btn-outline-danger"
-            onClick={ handleUnFollow }>
-                UnFollow
-            </button>
-            
-            : <button className="btn btn-outline-info"
-            onClick={ handleFollow }>
-                Follow
-            </button>
-            
-            }
+   return (
+    
+    <>
+    {
+        followed
+        ? <button className="btn btn-outline-danger"
+        onClick={handleUnFollow}>
+            UnFollow
+        </button>
+        : <button className="btn btn-outline-info"
+        onClick={handleFollow}>
+            Follow
+        </button>
+    }
+    </>
 
-        </div>
     )
 
 }

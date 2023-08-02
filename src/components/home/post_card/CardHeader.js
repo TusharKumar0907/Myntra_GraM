@@ -61,10 +61,6 @@ const CardHeader = ({post}) => {
                         </>
                     }
 
-                    <div className="dropdown-item">
-                        <span className="material-icons">content_copy</span> Copy Link
-                    </div>
-
                 </div>
                 
             </div>

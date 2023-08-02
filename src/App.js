@@ -15,22 +15,24 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { refreshToken } from './redux/actions/authAction.js';
 
-
 import { getPosts } from './redux/actions/postAction.js';
+import { getSuggestions } from './redux/actions/suggestionsAction.js';
 
 function App() {
-
 
   const { auth,status } = useSelector(state => state);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(refreshToken())
-  // },[dispatch]);
+  useEffect(() => {
+    dispatch(refreshToken())
+  },[dispatch]);
 
 
   useEffect(() => {
+  if(auth.token) {
     dispatch(getPosts(auth.token))
+    dispatch(getSuggestions(auth.token));
+  }
   },[dispatch, auth.token]);
 
   return (
