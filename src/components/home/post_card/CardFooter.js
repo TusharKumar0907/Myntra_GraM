@@ -11,7 +11,7 @@ const CardFooter = ({post}) => {
     const[isLike, setIsLike] = useState(false);
     const[loadlike, setLoadlike] = useState(false);
 
-    const { auth } = useSelector(state => state);
+    const { auth, socket } = useSelector(state => state);
     const dispatch = useDispatch();
 
     // loadlike --> during the time we are liking the post during that time only we can not dislike the post
@@ -28,7 +28,7 @@ const CardFooter = ({post}) => {
         if(loadlike)return;
         setIsLike(true);
         setLoadlike(true);
-        await dispatch(likePost({post, auth}));
+        await dispatch(likePost({post, auth, socket}));
         setLoadlike(false);
     }
 
@@ -36,7 +36,7 @@ const CardFooter = ({post}) => {
         if(loadlike)return;
         setIsLike(false);
         setLoadlike(true);
-        await dispatch(unLikePost({post, auth}));
+        await dispatch(unLikePost({post, auth, socket}));
         setLoadlike(false);
     }
 

@@ -4,9 +4,6 @@ import { follow, unfollow } from '../redux/actions/ProfileAction.js'
 
 const FollowBtn = ({ user }) => {
 
-
-    console.log(user);
-
     const [followed, setFollowed] = useState(false);
 
     const { auth, profile } = useSelector(state => state);
