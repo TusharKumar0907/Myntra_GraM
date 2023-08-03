@@ -48,6 +48,7 @@ function App() {
     
       <Routes>
       <Route exact path="/" Component={auth.token ? Home : Login}/>
+      <Route exact path="/register" Component={auth.token ? Home : Register}/>
       <Route exact path="/:page" Component={ PageRender } />
       <Route exact path="/:page/:id" Component={ PageRender } />   
       </Routes>
