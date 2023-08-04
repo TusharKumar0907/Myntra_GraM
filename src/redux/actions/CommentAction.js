@@ -3,7 +3,7 @@ import { POST_TYPES } from "./postAction.js";
 import { postDataAPI, patchDataAPI } from "../../utils/fetchData.js";
 
 
-export const createComment =  (post, newComment, auth) => async(dispatch) =>  {
+export const createComment =  (post, newComment, auth, socket) => async(dispatch) =>  {
     
     // console.log({post, newComment, auth});
 
@@ -14,7 +14,12 @@ export const createComment =  (post, newComment, auth) => async(dispatch) =>  {
     try {
         const data = {...newComment, postId: post._id}
         const res = await postDataAPI('comment', data, auth.token);
-        console.log(res);
+        // console.log(res);
+
+        const newData = {...res.data.newComment, user: auth.user}
+        const newPost = {...post, comments: [...post.comments, newData]}
+
+        socket.emit('createComment', newPost);
         
     } catch (err) {
         dispatch({ type: GLOBALTYPES.ALERT, payload: {error: err.response.data.msg} })

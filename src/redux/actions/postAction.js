@@ -17,8 +17,8 @@ export const createPost = ({content, images, auth}) => async (dispatch) => {
     let media = []
     try {
         
-        console.log({content, images, auth });
-        
+        // console.log({content, images, auth });
+    
         dispatch({ type: GLOBALTYPES.ALERT, payload: {loading: true} })
         
         if(images.length > 0) media = await imageUpload(images)
@@ -112,10 +112,12 @@ export const likePost = ({post, auth, socket}) => async (dispatch) => {
     }
 }
 
-export const unLikePost = ({post, auth}) => async (dispatch) => {
+export const unLikePost = ({post, auth, socket}) => async (dispatch) => {
     
     const newPost = {...post, likes: post.likes.filter(like => like._id !== auth.user._id)}
     dispatch({ type: POST_TYPES.UPDATE_POST, payload: newPost})
+
+    socket.emit('unLikePost', newPost);
 
     try {
         const val = await patchDataAPI(`post/${post._id}/unlike`, null, auth.token);
