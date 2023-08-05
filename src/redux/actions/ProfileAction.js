@@ -76,7 +76,7 @@ export const updateProfileUser = ({userData, auth}) => async (dispatch) => {
 }
 
 
-export const follow = ({users, user, auth, follow}) => async (dispatch) => {
+export const follow = ({users, user, auth, follow, socket}) => async (dispatch) => {
 
     let newUser = {...user, followers: [...user.followers, auth.user]};
 
