@@ -1,25 +1,55 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
-const UserCard = ({user, border, children}) => {
+const UserCard = ({children, user, border, handleClose, setShowFollowers, setShowFollowing, msg}) => {
+
+    const handleCloseAll = () => {
+        if(handleClose) handleClose()
+        if(setShowFollowers) setShowFollowers(false)
+        if(setShowFollowing) setShowFollowing(false)
+    }
+
+    const showMsg = (user) => {
+        return(
+            <>
+                <div>
+                    {user.text}
+                </div>
+                {
+                    user.media.length > 0 && 
+                    <div>
+                        {user.media.length} <i className="fas fa-image" />
+                    </div>
+                }
+            </>
+        )
+    }
+
     return (
         <div className={`d-flex p-2 align-items-center justify-content-between w-100 ${border}`}>
-        <div>
-               <div className="ml-1" style={{transform: 'translateY(-2px)'}}>
-                    <span className="d-block">{user.username}</span>
+            <div>
+
+                <Link to={`/profile/${user._id}`} onClick={handleCloseAll}
+                className="d-flex align-items-center">
                     
-                    <small style={{opacity: 1}}>
-                        {
-                           user.fullname
-                        }
-                    </small>
-                </div>
-        </div>
-        <div style={{ paddingLeft: '20px' }} >
-        { children }
-        </div>
+                    <div className="ml-1" style={{transform: 'translateY(-2px)'}}>
+                  
+                        <span className="d-block">{user.username}</span>
+                        
+                        <small style={{opacity: 0.7}}>
+                            {
+                                msg 
+                                ? showMsg(user)
+                                : user.fullname
+                            }
+                        </small>
+                    </div>
+                </Link>
+            </div>
+            {children}
         </div>
     )
 }
-
 
 export default UserCard

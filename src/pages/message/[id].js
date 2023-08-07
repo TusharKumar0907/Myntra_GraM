@@ -1,6 +1,6 @@
 import React from 'react'
 import LeftSide from '../../components/message/LeftSide.js';
-// import RightSide from '../../components/message/RightSide'
+import RightSide from '../../components/message/RightSide.js';
 
 const Conversation = () => {
     return (
@@ -9,9 +9,9 @@ const Conversation = () => {
                 <LeftSide />
             </div>
 
-            {/* <div className="col-md-8 px-0">
+            <div className="col-md-8 px-0">
                 <RightSide />
-            </div> */}
+            </div>
         </div>
     )
 }

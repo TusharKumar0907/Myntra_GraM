@@ -7,6 +7,7 @@ import status from './statusReducer.js';
 import homePost from './postReducer.js';
 import suggestions from './suggestionReducer.js';
 import socket from './socketReducer.js';
+import message from './messageReducer.js';
 
 export default combineReducers({
     auth,
@@ -16,6 +17,7 @@ export default combineReducers({
     status,
     homePost,
     suggestions,
-    socket
+    socket,
+    message
 });
 
