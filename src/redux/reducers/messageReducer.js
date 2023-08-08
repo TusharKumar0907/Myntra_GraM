@@ -19,24 +19,16 @@ const messageReducer = (state = initialState, action) => {
             }
             return state;
         case MESS_TYPES.ADD_MESSAGE:
+            // console.log(action.payload);
+            // console.log(state.data);
             return {
                 ...state,
-                data: state.data.map(item => 
-                    item._id === action.payload.recipient || item._id === action.payload.sender 
-                    ? {
-                        ...item,
-                        messages: [...item.messages, action.payload],
-                        result: item.result + 1
-                    }
-                    : item
-                ),
+                data: [...state.data, action.payload],
                 users: state.users.map(user => 
                     user._id === action.payload.recipient || user._id === action.payload.sender
                     ? {
                         ...user, 
-                        text: action.payload.text, 
-                        media: action.payload.media,
-                        call: action.payload.call
+                        text: action.payload.text
                     }
                     : user
                 )

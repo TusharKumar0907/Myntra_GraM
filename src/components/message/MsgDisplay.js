@@ -13,31 +13,26 @@ const MsgDisplay = ({user, msg, data}) => {
         dispatch(deleteMessages({msg, data, auth}))
     }
 
+
+    //console.log(msg);
+
     return (
         <>
             <div className="chat_title">
-                <span>{user.username}</span>
+                <span>{ user.username }</span>
             </div>
 
             <div className="you_content">
-                { 
-                    user._id === auth.user._id && 
-                    <button onClick={handleDeleteMessages}>
-                        Delete
-                    </button>
-                }
-
-                <div>
+            
                     {
                         msg.text && 
                         <div className="chat_text">
-                            {msg.text}
+                            { msg.text }
                         </div>
                     }
-                </div>
 
                 <div className='chat_time'>
-                    8 August 2023
+                    {new Date(msg.createdAt).toISOString()}
                 </div>
 
             </div>
