@@ -32,6 +32,7 @@ const MsgDisplay = ({user, msg, data}) => {
                     }
 
             </div>
+
         </>
     )
 }

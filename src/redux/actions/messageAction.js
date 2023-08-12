@@ -13,7 +13,7 @@ export const MESS_TYPES = {
 }
 
 
-export const addMessage = ({msg, auth, socket}) => async (dispatch) =>{
+export const addMessage = ({msg, auth}) => async (dispatch) =>{
    
     dispatch({type: MESS_TYPES.ADD_MESSAGE, payload: msg})
 
