@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import MsgDisplay from './MsgDisplay.js';
 import { GLOBALTYPES } from '../../redux/actions/globalTypes.js';
-import { addMessage } from '../../redux/actions/messageAction';
+import { addMessage, getMessages } from '../../redux/actions/messageAction.js';
 
 
 const RightSide = () => {
@@ -26,7 +26,7 @@ const RightSide = () => {
     }, [message.users, id])
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         
         e.preventDefault()
 
@@ -34,16 +34,29 @@ const RightSide = () => {
         
         setText('')
 
+        let newArr = [];
+
+
         const msg = {
             sender: auth.user._id,
             recipient: id,
-            text,
+            text, 
+            media: newArr,
             createdAt: new Date().toISOString()
         }
 
-        dispatch(addMessage({msg, auth, socket}))
 
+        dispatch(addMessage({msg, auth, socket}))
     }
+
+    useEffect(() => {
+        if(id) {
+            const getMessagesData = async () => {
+                await dispatch(getMessages({auth, id}))
+            }
+            getMessagesData()
+        }
+    },[id, dispatch, auth])
     
     
     return (

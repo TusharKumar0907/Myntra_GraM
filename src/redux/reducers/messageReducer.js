@@ -43,7 +43,8 @@ const messageReducer = (state = initialState, action) => {
         case MESS_TYPES.GET_MESSAGES:
             return {
                 ...state,
-                data: [...state.data, action.payload]
+                data: action.payload.messages,
+                resultData: action.payload.result
             };
         case MESS_TYPES.UPDATE_MESSAGES:
             return {

@@ -2,7 +2,6 @@ import React from 'react';
 import CardBody from './home/post_card/CardBody.js';
 import CardFooter from './home/post_card/CardFooter.js';
 import CardHeader from './home/post_card/CardHeader.js';
-
 import Comments from './home/Comments.js';
 import InputComment from './home/InputComment.js';
  

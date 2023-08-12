@@ -13,35 +13,41 @@ export const MESS_TYPES = {
 }
 
 
-
 export const addMessage = ({msg, auth, socket}) => async (dispatch) =>{
    
     dispatch({type: MESS_TYPES.ADD_MESSAGE, payload: msg})
 
-    console.log(msg);
+    // console.log(msg);
 
     const { _id, avatar, fullname, username } = auth.user
-    socket.emit('addMessage', {...msg, user: { _id, avatar, fullname, username } })
     
-    // try {
-    //     await postDataAPI('message', msg, auth.token)
-    // } catch (err) {
-    //     dispatch({type: GLOBALTYPES.ALERT, payload: {error: err.response.data.msg}})
-    // }
+    // socket.emit('addMessage', {...msg, user: { _id, avatar, fullname, username } })
+    
+    try {
+        await postDataAPI('message', msg, auth.token)
+    } catch (err) {
+        dispatch({type: GLOBALTYPES.ALERT, payload: {error: err.response.data.msg}})
+    }
+
 }
 
 export const getConversations = ({auth, page = 1}) => async (dispatch) => {
     try {
+        
         const res = await getDataAPI(`conversations?limit=${page * 9}`, auth.token)
+
+        // console.log(res);
         
         let newArr = [];
         res.data.conversations.forEach(item => {
             item.recipients.forEach(cv => {
                 if(cv._id !== auth.user._id){
-                    newArr.push({...cv, text: item.text, media: item.media, call: item.call})
+                    newArr.push({...cv, text: item.text})
                 }
             })
         })
+
+        // console.log(newArr);
 
         dispatch({
             type: MESS_TYPES.GET_CONVERSATIONS, 
@@ -55,10 +61,13 @@ export const getConversations = ({auth, page = 1}) => async (dispatch) => {
 
 export const getMessages = ({auth, id, page = 1}) => async (dispatch) => {
     try {
-        const res = await getDataAPI(`message/${id}?limit=${page * 9}`, auth.token)
-        const newData = {...res.data, messages: res.data.messages.reverse()}
+        const res = await getDataAPI(`message/${id}`, auth.token)
 
-        dispatch({type: MESS_TYPES.GET_MESSAGES, payload: {...newData, _id: id, page}})
+        console.log(res);
+
+        // const newData = {...res.data, messages: res.data.messages.reverse()}
+
+        dispatch({type: MESS_TYPES.GET_MESSAGES, payload: res.data})
     } catch (err) {
         dispatch({type: GLOBALTYPES.ALERT, payload: {error: err.response.data.msg}})
     }

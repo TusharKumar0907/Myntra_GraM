@@ -4,7 +4,7 @@ import { GLOBALTYPES } from '../../redux/actions/globalTypes.js';
 import { useDispatch, useSelector } from 'react-redux';
 import UserCard from '../UserCard.js';
 import { useNavigate,useParams } from "react-router-dom";
-import { MESS_TYPES, getConversations } from '../../redux/actions/messageAction'
+import { MESS_TYPES, getConversations } from '../../redux/actions/messageAction.js'
 
 
 const LeftSide = () => {
@@ -19,6 +19,7 @@ const LeftSide = () => {
     const [searchUsers, setSearchUsers] = useState([])
     
     
+    //Search User
     useEffect(() => {
         
         if(search && auth.token) {
@@ -36,10 +37,9 @@ const LeftSide = () => {
             setSearchUsers([]);
         }
     }, [search, auth.token, dispatch]);
+
     
     const handleAddUser = (user) => {
-        
-        // console.log(message);
 
         setSearch('');
         setSearchUsers([]);
@@ -54,7 +54,12 @@ const LeftSide = () => {
     }
 
 
+    useEffect(() => {
+        if(message.firstLoad) return;
+        dispatch(getConversations({auth}))
+    },[message.firstLoad, auth, dispatch])
     
+
     return (
        <>
             <form className="message_header">

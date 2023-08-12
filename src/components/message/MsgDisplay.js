@@ -14,7 +14,7 @@ const MsgDisplay = ({user, msg, data}) => {
     }
 
 
-    //console.log(msg);
+    // console.log(msg);
 
     return (
         <>
@@ -30,10 +30,6 @@ const MsgDisplay = ({user, msg, data}) => {
                             { msg.text }
                         </div>
                     }
-
-                <div className='chat_time'>
-                    {new Date(msg.createdAt).toISOString()}
-                </div>
 
             </div>
         </>
