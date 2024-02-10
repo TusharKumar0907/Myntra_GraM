@@ -9,11 +9,6 @@ const app = express();
 
 // app.use(express.json());
 
-//cookie parser has been deprecetated
-
-app.use(cors());
-app.use(cookieParser());
-
 //express does not know how to access data from request so initially there was a library called bodyparser but there is other way 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
